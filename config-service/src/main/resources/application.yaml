@@ -5,8 +5,8 @@ spring:
     config:
       server:
         git:
-          default-label: main
           uri: https://github.com/benjaminCanalesC/autofix-ms-backend
           search-paths: config-data
+          default-label: main
   application:
     name: config-service
