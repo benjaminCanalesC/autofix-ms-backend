@@ -10,7 +10,7 @@ eureka:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 spring:
   application:
-    name: vehiclebrand-service
+    name: vehicle-brand-service
   jpa:
     hibernate:
       ddl-auto: update
