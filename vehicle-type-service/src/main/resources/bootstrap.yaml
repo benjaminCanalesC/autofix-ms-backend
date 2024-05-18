@@ -1,6 +1,6 @@
 spring:
   application:
-    name: vehicle-brand-service
+    name: vehicle-type-service
   cloud:
     config:
       enabled: true
