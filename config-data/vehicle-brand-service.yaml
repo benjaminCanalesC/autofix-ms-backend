@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:${SERVER_PORT:0}}
+  port: 8091
 eureka:
   client:
     fetch-registry: true
@@ -10,7 +10,7 @@ eureka:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 spring:
   application:
-    name: vehiclebrand-service
+    name: vehicle-brand-service
   jpa:
     hibernate:
       ddl-auto: update
