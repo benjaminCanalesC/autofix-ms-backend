@@ -20,7 +20,7 @@ spring:
         - id: vehiclebrand-service
           uri: lb://vehiclebrand-service
           predicates:
-            - Path=/api/vehicleBrands/**
+            - Path=/vehicleBrands/**
         - id: example-service
           uri: lb://example-service
           predicates:
