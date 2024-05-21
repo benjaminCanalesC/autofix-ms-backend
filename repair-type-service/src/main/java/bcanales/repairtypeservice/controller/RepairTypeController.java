@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/repairTypes")
@@ -25,5 +26,11 @@ public class RepairTypeController {
     public ResponseEntity<List<RepairTypeEntity>> getRepairTypes() {
         List<RepairTypeEntity> repairTypes = repairTypeService.getRepairTypes();
         return ResponseEntity.ok(repairTypes);
+    }
+
+    @GetMapping("/repairTypeById/{id}")
+    public ResponseEntity<Optional<RepairTypeEntity>> getRepairTypes(@PathVariable Long id) {
+        Optional<RepairTypeEntity> repairType = repairTypeService.getRepairTypeById(id);
+        return ResponseEntity.ok(repairType);
     }
 }

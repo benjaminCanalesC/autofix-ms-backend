@@ -24,7 +24,16 @@ public class BrandDiscountService {
         return brandDiscountRepository.save(brandDiscount);
     }
 
-    public int calculateBrandDiscount(RepairDTO repair) {
+    public boolean deleteBrandDiscount(Long id) throws Exception {
+        try {
+            brandDiscountRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public int calculateBrandDiscount(RepairDTO repair) throws Exception {
         if (repair.isBonusDiscount()) {
             VehicleDTO vehicle = vehicleService.getVehicleById(repair.getVehicleId()).get();
 
@@ -38,7 +47,14 @@ public class BrandDiscountService {
 
             if (brandDiscount.getQuantity() != 0) {
                 brandDiscount.setQuantity(brandDiscount.getQuantity() - 1);
-                return brandDiscount.getAmount();
+
+                int brandDiscountAmount = brandDiscount.getAmount();
+
+                if (brandDiscount.getQuantity() == 0) {
+                    deleteBrandDiscount(brandDiscount.getId());
+                }
+
+                return brandDiscountAmount;
             }
         }
         return 0;

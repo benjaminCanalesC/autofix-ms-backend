@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: discount-service
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8081
