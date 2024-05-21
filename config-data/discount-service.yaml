@@ -1,5 +1,5 @@
 server:
-  port: 8099
+  port: 8096
 eureka:
   client:
     fetch-registry: true
@@ -10,12 +10,12 @@ eureka:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 spring:
   application:
-    name: vehicle-service
+    name: discount-service
   jpa:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:postgresql://localhost:5432/autofix_vehicle
+    url: jdbc:postgresql://localhost:5432/autofix_discount
     username: postgres
     password: 1234
   sql:

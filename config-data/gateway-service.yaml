@@ -17,7 +17,35 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: vehiclebrand-service
-          uri: lb://vehiclebrand-service
+        - id: vehicle-brand-service
+          uri: lb://vehicle-brand-service
           predicates:
             - Path=/api/vehicleBrands/**
+        - id: vehicle-type-service
+          uri: lb://vehicle-type-service
+          predicates:
+            - Path=/api/vehicleTypes/**
+        - id: vehicle-engine-service
+          uri: lb://vehicle-engine-service
+          predicates:
+            - Path=/api/vehicleEngines/**
+        - id: vehicle-service
+          uri: lb://vehicle-service
+          predicates:
+            - Path=/api/vehicles/**
+        - id: brand-discount-service
+          uri: lb://brand-discount-service
+          predicates:
+            - Path=/api/brandDiscounts/**
+        - id: discount-service
+          uri: lb://discount-service
+          predicates:
+            - Path=/api/discounts/**
+        - id: repair-type-service
+          uri: lb://repair-type-service
+          predicates:
+            - Path=/api/repairTypes/**
+        - id: surcharge-service
+          uri: lb://surcharge-service
+          predicates:
+            - Path=/api/surcharges/**
