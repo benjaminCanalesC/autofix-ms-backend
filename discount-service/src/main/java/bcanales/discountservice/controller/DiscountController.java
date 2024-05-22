@@ -14,13 +14,13 @@ public class DiscountController {
     @Autowired
     DiscountService discountService;
 
-    @GetMapping("/byRepairs")
+    @PostMapping("/byRepairs")
     public ResponseEntity<Double> discountByRepairs(@RequestBody VehicleDTO vehicle) {
         Double discount = discountService.discountByRepairs(vehicle);
         return ResponseEntity.ok(discount);
     }
 
-    @GetMapping("/byAttentionDays")
+    @PostMapping("/byAttentionDays")
     public ResponseEntity<Double> discountByAttentionDays(@RequestBody RepairDTO repair) {
         Double discount = discountService.discountByAttentionDays(repair);
         return ResponseEntity.ok(discount);

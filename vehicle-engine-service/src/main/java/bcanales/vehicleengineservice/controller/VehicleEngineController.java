@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/vehicleEngines")
@@ -25,5 +26,10 @@ public class VehicleEngineController {
     public ResponseEntity<List<VehicleEngineEntity>> getVehicleEngines() {
         List<VehicleEngineEntity> vehicleEngines = vehicleEngineService.getVehicleEngines();
         return ResponseEntity.ok(vehicleEngines);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<VehicleEngineEntity> getVehicleEngineById(@PathVariable Long id) {
+        return vehicleEngineService.getVehicleTypeById(id);
     }
 }

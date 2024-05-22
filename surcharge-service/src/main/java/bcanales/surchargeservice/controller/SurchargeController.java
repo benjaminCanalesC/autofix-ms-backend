@@ -14,19 +14,19 @@ public class SurchargeController {
     @Autowired
     private SurchargeService surchargeService;
 
-    @GetMapping("/byMileage")
+    @PostMapping("/byMileage")
     public ResponseEntity<Double> surchargeByMileage(@RequestBody VehicleDTO vehicle) throws Exception {
         Double discount = surchargeService.surchargeByMileage(vehicle);
         return ResponseEntity.ok(discount);
     }
 
-    @GetMapping("/byVehicleYears")
+    @PostMapping("/byVehicleYears")
     public ResponseEntity<Double> surchargeByVehicleYears(@RequestBody VehicleDTO vehicle) throws Exception {
         Double discount = surchargeService.surchargeByVehicleYears(vehicle);
         return ResponseEntity.ok(discount);
     }
 
-    @GetMapping("/byPickupDelay")
+    @PostMapping("/byPickupDelay")
     public ResponseEntity<Double> surchargeByPickupDelay(@RequestBody RepairDTO repair) {
         Double discount = surchargeService.surchargeByPickupDelay(repair);
         return ResponseEntity.ok(discount);

@@ -20,9 +20,8 @@ public class BrandDiscountController {
         return ResponseEntity.ok(newBrandDiscount);
     }
 
-    @GetMapping("/")
-    public ResponseEntity<Integer> getBrandDiscountAmount(@RequestBody RepairDTO repair) throws Exception {
-        Integer brandDiscountAmount = brandDiscountService.calculateBrandDiscount(repair);
-        return ResponseEntity.ok(brandDiscountAmount);
+    @PostMapping("/calculate")
+    public int calculateBrandDiscount(@RequestBody RepairDTO repair) throws Exception {
+        return brandDiscountService.calculateBrandDiscount(repair);
     }
 }

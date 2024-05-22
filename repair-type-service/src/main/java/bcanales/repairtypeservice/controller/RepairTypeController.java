@@ -28,8 +28,8 @@ public class RepairTypeController {
         return ResponseEntity.ok(repairTypes);
     }
 
-    @GetMapping("/repairTypeById/{id}")
-    public ResponseEntity<Optional<RepairTypeEntity>> getRepairTypes(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<RepairTypeEntity>> getRepairTypeById(@PathVariable Long id) {
         Optional<RepairTypeEntity> repairType = repairTypeService.getRepairTypeById(id);
         return ResponseEntity.ok(repairType);
     }

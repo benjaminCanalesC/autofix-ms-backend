@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class VehicleEngineService {
@@ -19,4 +20,9 @@ public class VehicleEngineService {
     public ArrayList<VehicleEngineEntity> getVehicleEngines() {
         return (ArrayList<VehicleEngineEntity>) vehicleEngineRepository.findAll();
     }
+
+    public Optional<VehicleEngineEntity> getVehicleTypeById(Long id) {
+        return vehicleEngineRepository.findById(id);
+    }
+
 }
