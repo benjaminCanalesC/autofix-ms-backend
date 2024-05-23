@@ -16,15 +16,9 @@ spring:
       discovery:
         locator:
           enabled: true
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOrigins: '*'
-            allowedMethods: "*"
-            allowedHeaders: "*"
       routes:
-          - id: vehicle-brand-service
-            uri: lb://vehicle-brand-service
+          - id: VEHICLE-BRAND-SERVICE
+            uri: lb://VEHICLE-BRAND-SERVICE
             predicates:
               - Path=/api/vehicleBrands/**
           - id: vehicle-type-service
