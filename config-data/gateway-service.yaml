@@ -17,35 +17,51 @@ spring:
         locator:
           enabled: true
       routes:
-          - id: VEHICLE-BRAND-SERVICE
-            uri: lb://VEHICLE-BRAND-SERVICE
-            predicates:
-              - Path=/api/vehicleBrands/**
-          - id: vehicle-type-service
-            uri: lb://vehicle-type-service
-            predicates:
-              - Path=/api/vehicleTypes/**
-          - id: vehicle-engine-service
-            uri: lb://vehicle-engine-service
-            predicates:
-              - Path=/api/vehicleEngines/**
-          - id: vehicle-service
-            uri: lb://vehicle-service
-            predicates:
-              - Path=/api/vehicles/**
-          - id: brand-discount-service
-            uri: lb://brand-discount-service
-            predicates:
-              - Path=/api/brandDiscounts/**
-          - id: discount-service
-            uri: lb://discount-service
-            predicates:
-              - Path=/api/discounts/**
-          - id: repair-type-service
-            uri: lb://repair-type-service
-            predicates:
-              - Path=/api/repairTypes/**
-          - id: surcharge-service
-            uri: lb://surcharge-service
-            predicates:
-              - Path=/api/surcharges/**
+        - id: vehicle-brand-service
+          uri: lb://vehicle-brand-service
+          predicates:
+            - Path=/api/vehicleBrands/**
+          filters:
+            - StripPrefix=1
+        - id: vehicle-type-service
+          uri: lb://vehicle-type-service
+          predicates:
+            - Path=/api/vehicleTypes/**
+          filters:
+            - StripPrefix=1
+        - id: vehicle-engine-service
+          uri: lb://vehicle-engine-service
+          predicates:
+            - Path=/api/vehicleEngines/**
+          filters:
+            - StripPrefix=1
+        - id: vehicle-service
+          uri: lb://vehicle-service
+          predicates:
+            - Path=/api/vehicles/**
+          filters:
+            - StripPrefix=1
+        - id: brand-discount-service
+          uri: lb://brand-discount-service
+          predicates:
+            - Path=/api/brandDiscounts/**
+          filters:
+            - StripPrefix=1
+        - id: discount-service
+          uri: lb://discount-service
+          predicates:
+            - Path=/api/discounts/**
+          filters:
+            - StripPrefix=1
+        - id: repair-type-service
+          uri: lb://repair-type-service
+          predicates:
+            - Path=/api/repairTypes/**
+          filters:
+            - StripPrefix=1
+        - id: surcharge-service
+          uri: lb://surcharge-service
+          predicates:
+            - Path=/api/surcharges/**
+          filters:
+            - StripPrefix=1
