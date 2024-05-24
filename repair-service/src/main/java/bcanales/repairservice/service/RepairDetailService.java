@@ -6,7 +6,9 @@ import bcanales.repairservice.clients.VehicleService;
 import bcanales.repairservice.dtos.RepairTypeDTO;
 import bcanales.repairservice.dtos.VehicleDTO;
 import bcanales.repairservice.entity.RepairDetailEntity;
+import bcanales.repairservice.entity.RepairEntity;
 import bcanales.repairservice.repository.RepairDetailRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,21 +37,17 @@ public class RepairDetailService {
 
         int baseRepairCost;
 
+        Long repairTypeId = repairDetail.getRepairTypeId();
+        RepairTypeDTO repairType = repairTypeService.getRepairTypeById(repairTypeId)
+                .orElseThrow(() -> new EntityNotFoundException("Repair Type with id " + repairTypeId + " does not exist."));
+
         if (vehicleEngine.equals("Gasolina")) {
-            Long repairTypeId = repairDetail.getRepairTypeId();
-            RepairTypeDTO repairType = repairTypeService.getRepairTypeById(repairTypeId).get();
             baseRepairCost = repairType.getGasolineCost();
         } else if (vehicleEngine.equals("Diesel")) {
-            Long repairTypeId = repairDetail.getRepairTypeId();
-            RepairTypeDTO repairType = repairTypeService.getRepairTypeById(repairTypeId).get();
             baseRepairCost = repairType.getDieselCost();
         } else if (vehicleEngine.equals("Hibrido")) {
-            Long repairTypeId = repairDetail.getRepairTypeId();
-            RepairTypeDTO repairType = repairTypeService.getRepairTypeById(repairTypeId).get();
             baseRepairCost = repairType.getHybridCost();
         } else if (vehicleEngine.equals("Electrico")) {
-            Long repairTypeId = repairDetail.getRepairTypeId();
-            RepairTypeDTO repairType = repairTypeService.getRepairTypeById(repairTypeId).get();
             baseRepairCost = repairType.getElectricCost();
         } else {
             throw new Exception("Invalid Engine");
