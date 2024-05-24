@@ -13,7 +13,7 @@ public class DiscountService {
     @Autowired
     private RepairService repairService;
     public double discountByRepairs(VehicleDTO vehicle) {
-        int vehicleRepairs = repairService.getRepairsAmountByVehicleId(vehicle.getId());
+        int vehicleRepairs = repairService.getRepairsAmountByVehicleId(vehicle.getId()) - 1;
         String vehicleEngine = String.valueOf(vehicle.getVehicleEngineId());
 
         if (vehicleEngine.equals("Gasolina")){

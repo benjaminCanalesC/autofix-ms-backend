@@ -1,11 +1,13 @@
 package bcanales.repairservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,18 +22,19 @@ public class RepairEntity {
 
     private int repairCost;
     private int baseRepairCost;
+    private int subtotalCost;
     private int discount;
     private int surcharge;
     private int iva;
     private boolean bonusDiscount;
 
     private LocalDateTime entryDateTime;
-
     private LocalDateTime exitDateTime;
-
     private LocalDateTime pickupDateTime;
 
-    private Long repairTypeId;
+    @OneToMany(mappedBy = "repair", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<RepairDetailEntity> repairDetails;
 
     private Long vehicleId;
 }

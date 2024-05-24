@@ -1,11 +1,12 @@
 package bcanales.repairservice.service;
 
 import bcanales.repairservice.clients.*;
-import bcanales.repairservice.dtos.RepairTypeDTO;
 import bcanales.repairservice.dtos.VehicleDTO;
+import bcanales.repairservice.entity.RepairDetailEntity;
 import bcanales.repairservice.entity.RepairEntity;
 import bcanales.repairservice.repository.RepairRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,22 +18,55 @@ public class RepairService {
     @Autowired
     RepairRepository repairRepository;
     @Autowired
-    VehicleEngineService vehicleEngineService;
-    @Autowired
     VehicleService vehicleService;
-    @Autowired
-    RepairTypeService repairTypeService;
     @Autowired
     DiscountService discountService;
     @Autowired
     SurchargeService surchargeService;
     @Autowired
     BrandDiscountService brandDiscountService;
+    @Autowired
+    RepairDetailService repairDetailService;
 
+    @Transactional
     public RepairEntity saveRepair(RepairEntity repair) throws Exception {
-        int repairCost = calculateRepairCost(repair);
-        repair.setRepairCost(repairCost);
-        return repairRepository.save(repair);
+        VehicleDTO vehicle = vehicleService.getVehicleById(repair.getVehicleId());
+
+        repair.setVehicleId(vehicle.getId());
+
+        RepairEntity savedRepair = repairRepository.save(repair);
+
+        int baseRepairCost = 0;
+
+        for (RepairDetailEntity detail : repair.getRepairDetails()) {
+            detail.setRepair(savedRepair);
+            detail.setVehiclePlate(vehicle.getPlate());
+
+            RepairDetailEntity repairDetail = repairDetailService.saveRepairDetail(detail);
+
+            baseRepairCost += repairDetail.getRepairCost();
+        }
+
+        savedRepair.setBaseRepairCost(baseRepairCost);
+
+        double discountPercentage = discountService.discountByRepairs(vehicle) +
+                discountService.discountByAttentionDays(savedRepair);
+        int bonusDiscount = brandDiscountService.calculateBrandDiscount(savedRepair);
+        int discount = (int) Math.round(discountPercentage * baseRepairCost) + bonusDiscount;
+
+        savedRepair.setDiscount(discount);
+
+        double surchargePercentage = surchargeService.surchargeByMileage(vehicle) +
+                surchargeService.surchargeByVehicleYears(vehicle);
+        int surcharge = (int) Math.round(surchargePercentage * baseRepairCost);
+
+        savedRepair.setSurcharge(surcharge);
+
+        int subtotalCost = baseRepairCost - discount + surcharge;
+        savedRepair.setSubtotalCost(subtotalCost);
+        savedRepair.setRepairCost(subtotalCost);
+
+        return repairRepository.save(savedRepair);
     }
 
     public int getRepairsAmountByVehicleId(Long vehicleId) { return repairRepository.countByVehicleId(vehicleId); }
@@ -58,16 +92,19 @@ public class RepairService {
         RepairEntity existingRepair = repairRepository.findById(repair.getId())
                 .orElseThrow(() -> new EntityNotFoundException("Repair with id " + repair.getId() + " does not exist."));
 
-        if (repair.getExitDateTime() != existingRepair.getExitDateTime()) {
+        if (repair.getExitDateTime() != null) {
             existingRepair.setExitDateTime(repair.getExitDateTime());
         }
 
-        if (repair.getPickupDateTime() != existingRepair.getPickupDateTime()) {
+        if (repair.getPickupDateTime() != null) {
             existingRepair.setPickupDateTime(repair.getPickupDateTime());
 
             double surchargeByPickupDelayPercentage = surchargeService.surchargeByPickupDelay(existingRepair);
 
             int surchargeByPickupDelay = (int) (surchargeByPickupDelayPercentage * existingRepair.getBaseRepairCost());
+
+            int subtotal = existingRepair.getSubtotalCost() + surchargeByPickupDelay;
+            existingRepair.setSubtotalCost(subtotal);
 
             // Se actualizan el recargo de la reparación
             int totalSurcharge = existingRepair.getSurcharge() + surchargeByPickupDelay;
@@ -84,52 +121,5 @@ public class RepairService {
         }
 
         return repairRepository.save(existingRepair);
-    }
-
-    public int calculateRepairCost(RepairEntity repair) throws Exception {
-        VehicleDTO vehicle = vehicleService.getVehicleById(repair.getVehicleId());
-
-        Long vehicleEngineId = vehicle.getVehicleEngineId();
-
-        String vehicleEngine = vehicleEngineService.getVehicleEngineById(vehicleEngineId).get().getEngine();
-
-        int baseRepairCost;
-
-        if (vehicleEngine.equals("Gasolina")) {
-            Long repairTypeId = repair.getRepairTypeId();
-            RepairTypeDTO repairType = repairTypeService.getRepairTypeById(repairTypeId).get();
-            baseRepairCost = repairType.getGasolineCost();
-        } else if (vehicleEngine.equals("Diesel")) {
-            Long repairTypeId = repair.getRepairTypeId();
-            RepairTypeDTO repairType = repairTypeService.getRepairTypeById(repairTypeId).get();
-            baseRepairCost = repairType.getDieselCost();
-        } else if (vehicleEngine.equals("Hibrido")) {
-            Long repairTypeId = repair.getRepairTypeId();
-            RepairTypeDTO repairType = repairTypeService.getRepairTypeById(repairTypeId).get();
-            baseRepairCost = repairType.getHybridCost();
-        } else if (vehicleEngine.equals("Electrico")) {
-            Long repairTypeId = repair.getRepairTypeId();
-            RepairTypeDTO repairType = repairTypeService.getRepairTypeById(repairTypeId).get();
-            baseRepairCost = repairType.getElectricCost();
-        } else {
-            throw new Exception("Invalid Engine");
-        }
-
-        repair.setBaseRepairCost(baseRepairCost);
-
-        double discountPercentage = discountService.discountByRepairs(vehicle) +
-                discountService.discountByAttentionDays(repair);
-        int bonusDiscount = brandDiscountService.calculateBrandDiscount(repair);
-        int discount = (int) Math.round(discountPercentage * baseRepairCost) + bonusDiscount;
-
-        repair.setDiscount(discount);
-
-        double surchargePercentage = surchargeService.surchargeByMileage(vehicle) +
-                surchargeService.surchargeByVehicleYears(vehicle);
-        int surcharge = (int) Math.round(surchargePercentage * baseRepairCost);
-
-        repair.setSurcharge(surcharge);
-
-        return baseRepairCost - discount + surcharge;
     }
 }

@@ -36,6 +36,13 @@ public class VehicleController {
         return  ResponseEntity.ok(vehicle);
     }
 
+    @PostMapping("/plate")
+    public ResponseEntity<VehicleEntity> getVehicleByPlate(@RequestBody VehicleEntity vehicle) {
+        VehicleEntity savedVehicle = vehicleService.getVehicleByPlate(vehicle.getPlate())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Vehicle not found"));
+        return  ResponseEntity.ok(savedVehicle);
+    }
+
     @PutMapping("/")
     public ResponseEntity<VehicleEntity> updateVehicle(@RequestBody VehicleEntity vehicle) {
         VehicleEntity newVehicle = vehicleService.updateVehicle(vehicle);
