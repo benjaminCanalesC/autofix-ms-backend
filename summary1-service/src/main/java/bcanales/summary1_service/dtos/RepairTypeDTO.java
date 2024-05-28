@@ -1,4 +1,4 @@
-package bcanales.repairservice.dtos;
+package bcanales.summary1_service.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

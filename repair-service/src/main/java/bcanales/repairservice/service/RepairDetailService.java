@@ -12,6 +12,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class RepairDetailService {
     @Autowired
@@ -56,5 +58,9 @@ public class RepairDetailService {
         repairDetail.setRepairCost(baseRepairCost);
 
         return repairDetailRepository.save(repairDetail);
+    }
+
+    public ArrayList<RepairDetailEntity> getRepairDetails() {
+        return (ArrayList<RepairDetailEntity>) repairDetailRepository.findAll();
     }
 }
