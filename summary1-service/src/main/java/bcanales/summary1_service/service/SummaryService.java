@@ -26,7 +26,7 @@ public class SummaryService {
     @Autowired
     private VehicleTypeService vehicleTypeService;
 
-    public ArrayList<SummaryDTO> getSummary() {
+    public ArrayList<SummaryDTO> getSummary(int month, int year) {
         List<RepairTypeDTO> repairTypes = repairTypeService.getRepairTypes();
 
         ArrayList<RepairDetailDTO> repairDetails = repairDetailService.getRepairDetails();
@@ -55,7 +55,9 @@ public class SummaryService {
             int totalAmount = 0;
 
             for (RepairDetailDTO repairDetail : repairDetails) {
-                if (Objects.equals(repairType.getId(), repairDetail.getRepairTypeId())) {
+                if (Objects.equals(repairType.getId(), repairDetail.getRepairTypeId()) &&
+                        repairDetail.getRepairDateTime().getMonth().getValue() == month &&
+                        repairDetail.getRepairDateTime().getYear() == year) {
                     String vehiclePlate = repairDetail.getVehiclePlate();
                     VehicleDTO vehicleDTO = new VehicleDTO();
                     vehicleDTO.setPlate(vehiclePlate);

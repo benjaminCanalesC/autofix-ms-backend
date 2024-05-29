@@ -2,6 +2,10 @@ package bcanales.summary1_service.clients;
 
 import bcanales.summary1_service.dtos.VehicleDTO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name = "vehicle-service")
 public interface VehicleService {

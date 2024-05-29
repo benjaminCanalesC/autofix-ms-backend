@@ -2,6 +2,8 @@ package bcanales.summary1_service.clients;
 
 import bcanales.summary1_service.dtos.VehicleTypeDTO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
 
