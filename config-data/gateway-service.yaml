@@ -21,43 +21,19 @@ spring:
             allowedMethods: "*"
             allowedHeaders: "*"
       routes:
-        - id: vehicle-brand-service
-          uri: lb://vehicle-brand-service
-          predicates:
-            - Path=/api/vehicleBrands/**
-        - id: vehicle-type-service
-          uri: lb://vehicle-type-service
-          predicates:
-            - Path=/api/vehicleTypes/**
-        - id: vehicle-engine-service
-          uri: lb://vehicle-engine-service
-          predicates:
-            - Path=/api/vehicleEngines/**
         - id: vehicle-service
-          uri: lb://vehicle-service
+          uri: lb://vehicle-service:8099
           predicates:
             - Path=/api/vehicles/**
-        - id: brand-discount-service
-          uri: lb://brand-discount-service
-          predicates:
-            - Path=/api/brandDiscounts/**
-        - id: discount-service
-          uri: lb://discount-service
-          predicates:
-            - Path=/api/discounts/**
         - id: repair-type-service
-          uri: lb://repair-type-service
+          uri: lb://repair-type-service:8094
           predicates:
             - Path=/api/repairTypes/**
-        - id: surcharge-service
-          uri: lb://surcharge-service
-          predicates:
-            - Path=/api/surcharges/**
         - id: summary1-service
-          uri: lb://summary1-service
+          uri: lb://summary1-service:8095
           predicates:
             - Path=/api/summary1/**
         - id: repair-service
-          uri: lb://repair-service
+          uri: lb://repair-service:8098
           predicates:
             - Path=/api/repairs/**
