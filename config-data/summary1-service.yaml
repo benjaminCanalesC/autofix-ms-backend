@@ -11,9 +11,3 @@ eureka:
 spring:
   application:
     name: summary1-service
-  jpa:
-    hibernate:
-      ddl-auto: update
-  sql:
-    init:
-      mode: never
