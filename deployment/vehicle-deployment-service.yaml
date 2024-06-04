@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehicle-deployment
+  labels:
+    app: vehicle-deployment
+spec:
+  selector:
+    matchLabels:
+      app: vehicle-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vehicle-deployment
+    spec:
+      containers:
+        - name: vehicle
+          image: bcanales/vehicle-service
+          ports:
+            - containerPort: 8099

@@ -80,6 +80,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>vehicle-brand-service</finalName>
 	</build>
 
 </project>

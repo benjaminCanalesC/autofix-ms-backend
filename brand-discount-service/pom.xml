@@ -86,6 +86,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>brand-discount-service</finalName>
 	</build>
 
 </project>

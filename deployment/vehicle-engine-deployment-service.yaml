@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehicle-engine-deployment
+  labels:
+    app: vehicle-engine-deployment
+spec:
+  selector:
+    matchLabels:
+      app: vehicle-engine-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vehicle-engine-deployment
+    spec:
+      containers:
+        - name: vehicle-engine
+          image: bcanales/vehicle-engine-service
+          ports:
+            - containerPort: 8092

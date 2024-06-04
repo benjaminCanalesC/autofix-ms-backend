@@ -86,6 +86,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>surcharge-service</finalName>
 	</build>
 
 </project>

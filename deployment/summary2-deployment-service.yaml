@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: summary2-deployment
+  labels:
+    app: summary2-deployment
+spec:
+  selector:
+    matchLabels:
+      app: summary2-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: summary2-deployment
+    spec:
+      containers:
+        - name: summary2
+          image: bcanales/summary2-service
+          ports:
+            - containerPort: 8083

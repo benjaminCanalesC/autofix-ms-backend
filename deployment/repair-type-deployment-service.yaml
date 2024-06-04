@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: repair-type-deployment
+  labels:
+    app: repair-type-deployment
+spec:
+  selector:
+    matchLabels:
+      app: repair-type-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: repair-type-deployment
+    spec:
+      containers:
+        - name: repair-type
+          image: bcanales/repair-type-service
+          ports:
+            - containerPort: 8094

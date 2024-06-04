@@ -80,6 +80,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>vehicle-engine-service</finalName>
 	</build>
 
 </project>

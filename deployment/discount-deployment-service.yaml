@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discount-deployment
+  labels:
+    app: discount-deployment
+spec:
+  selector:
+    matchLabels:
+      app: discount-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: discount-deployment
+    spec:
+      containers:
+        - name: discount
+          image: bcanales/discount-service
+          ports:
+            - containerPort: 8096

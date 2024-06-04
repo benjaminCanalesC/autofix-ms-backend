@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: surcharge-deployment
+  labels:
+    app: surcharge-deployment
+spec:
+  selector:
+    matchLabels:
+      app: surcharge-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: surcharge-deployment
+    spec:
+      containers:
+        - name: surcharge
+          image: bcanales/surcharge-service
+          ports:
+            - containerPort: 8097
