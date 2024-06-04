@@ -5,7 +5,7 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      defaultZone: http://eureka-server-service:8761/eureka/
+      defaultZone: http://eureka-service:8761/eureka/
 spring:
   cloud:
     gateway:
@@ -22,18 +22,22 @@ spring:
             allowedHeaders: "*"
       routes:
         - id: vehicle-service
-          uri: lb://vehicle-service:8099
+          uri: lb://vehicle-service
           predicates:
             - Path=/api/vehicles/**
         - id: repair-type-service
-          uri: lb://repair-type-service:8094
+          uri: lb://repair-type-service
           predicates:
             - Path=/api/repairTypes/**
         - id: summary1-service
-          uri: lb://summary1-service:8095
+          uri: lb://summary1-service
           predicates:
             - Path=/api/summary1/**
+        - id: summary2-service
+          uri: lb://summary2-service
+          predicates:
+            - Path=/api/summary2/**
         - id: repair-service
-          uri: lb://repair-service:8098
+          uri: lb://repair-service
           predicates:
             - Path=/api/repairs/**
