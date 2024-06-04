@@ -15,7 +15,7 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:postgresql://vehicle-type-db:5432/autofix_vehicle_type
+    url: jdbc:postgresql://vehicle-type-db-service:5432/autofix_vehicle_type
     username: postgres
     password: 1234
   sql:
