@@ -13,13 +13,3 @@ eureka:
 spring:
   application:
     name: surcharge-service
-  jpa:
-    hibernate:
-      ddl-auto: update
-  datasource:
-    url: jdbc:postgresql://surcharge-db-service:5432/autofix_surcharge
-    username: postgres
-    password: 1234
-  sql:
-    init:
-      mode: never
