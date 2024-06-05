@@ -15,7 +15,7 @@ spec:
         app: summary1-deployment
     spec:
       containers:
-        - name: summary1
+        - name: summary1-service
           image: bcanales/summary1-service
           ports:
             - containerPort: 8082

@@ -7,6 +7,8 @@ eureka:
     service-url:
       defaultZone: http://eureka-service:8761/eureka
   instance:
+    prefer-ip-address: true
+    hostname: eureka-service
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 spring:
   application:
@@ -15,7 +17,7 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:postgresql://localhost:5432/autofix_vehicle_brand
+    url: jdbc:postgresql://vehicle-brand-db-service:5432/autofix_vehicle_brand
     username: postgres
     password: 1234
   sql:

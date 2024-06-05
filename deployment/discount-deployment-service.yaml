@@ -15,7 +15,7 @@ spec:
         app: discount-deployment
     spec:
       containers:
-        - name: discount
+        - name: discount-service
           image: bcanales/discount-service
           ports:
             - containerPort: 8096

@@ -15,7 +15,7 @@ spec:
         app: surcharge-deployment
     spec:
       containers:
-        - name: surcharge
+        - name: surcharge-service
           image: bcanales/surcharge-service
           ports:
             - containerPort: 8097

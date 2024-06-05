@@ -15,7 +15,7 @@ spec:
         app: vehicle-deployment
     spec:
       containers:
-        - name: vehicle
+        - name: vehicle-service
           image: bcanales/vehicle-service
           ports:
             - containerPort: 8099

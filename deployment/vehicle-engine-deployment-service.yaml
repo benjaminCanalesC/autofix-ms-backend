@@ -15,7 +15,7 @@ spec:
         app: vehicle-engine-deployment
     spec:
       containers:
-        - name: vehicle-engine
+        - name: vehicle-engine-service
           image: bcanales/vehicle-engine-service
           ports:
             - containerPort: 8092

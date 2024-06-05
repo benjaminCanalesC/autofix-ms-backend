@@ -15,7 +15,7 @@ spec:
         app: vehicle-brand-deployment
     spec:
       containers:
-        - name: vehicle-brand
+        - name: vehicle-brand-service
           image: bcanales/vehicle-brand-service
           ports:
             - containerPort: 8091

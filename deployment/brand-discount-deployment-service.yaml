@@ -15,7 +15,7 @@ spec:
         app: brand-discount-deployment
     spec:
       containers:
-        - name: brand-discount
+        - name: brand-discount-service
           image: bcanales/brand-discount-service
           ports:
             - containerPort: 8095
