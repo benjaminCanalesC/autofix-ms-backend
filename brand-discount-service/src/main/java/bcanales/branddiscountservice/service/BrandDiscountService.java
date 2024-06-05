@@ -11,6 +11,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class BrandDiscountService {
     @Autowired
@@ -22,6 +24,10 @@ public class BrandDiscountService {
 
     public BrandDiscountEntity saveBrandDiscount(BrandDiscountEntity brandDiscount) {
         return brandDiscountRepository.save(brandDiscount);
+    }
+
+    public ArrayList<BrandDiscountEntity> getBrandDiscounts() {
+        return (ArrayList<BrandDiscountEntity>) brandDiscountRepository.findAll();
     }
 
     public boolean deleteBrandDiscount(Long id) throws Exception {
