@@ -41,7 +41,7 @@ spring:
           uri: lb://repair-service
           predicates:
             - Path=/api/repairs/**
-        - id: vehicle-type-service
-          uri: lb://vehicle-type-service
+        - id: brand-discount-service
+          uri: lb://brand-discount-service
           predicates:
-            - Path=/api/vehicleTypes/**
+            - Path=/api/brandDiscounts/**
