@@ -13,3 +13,6 @@ eureka:
 spring:
   application:
     name: discount-service
+  cloud:
+    compatibility-verifier:
+      enabled: false

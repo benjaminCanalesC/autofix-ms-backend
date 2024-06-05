@@ -13,3 +13,6 @@ eureka:
 spring:
   application:
     name: surcharge-service
+  cloud:
+    compatibility-verifier:
+      enabled: false
