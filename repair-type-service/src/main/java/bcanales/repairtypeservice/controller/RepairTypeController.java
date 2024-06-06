@@ -33,4 +33,10 @@ public class RepairTypeController {
         Optional<RepairTypeEntity> repairType = repairTypeService.getRepairTypeById(id);
         return ResponseEntity.ok(repairType);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteRepairTypeById(@PathVariable Long id) throws Exception {
+        repairTypeService.deleteRepairType(id);
+        return ResponseEntity.noContent().build();
+    }
 }

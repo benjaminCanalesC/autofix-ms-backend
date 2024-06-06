@@ -1,5 +1,6 @@
 package bcanales.repairservice.controller;
 
+import bcanales.repairservice.dtos.SaveRepairDTO;
 import bcanales.repairservice.entity.RepairEntity;
 import bcanales.repairservice.service.RepairService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class RepairController {
     RepairService repairService;
 
     @PostMapping("/")
-    public ResponseEntity<RepairEntity> saveRepair(@RequestBody RepairEntity repair) throws Exception {
+    public ResponseEntity<RepairEntity> saveRepair(@RequestBody SaveRepairDTO repair) throws Exception {
         RepairEntity newRepair = repairService.saveRepair(repair);
         return  ResponseEntity.ok(newRepair);
     }

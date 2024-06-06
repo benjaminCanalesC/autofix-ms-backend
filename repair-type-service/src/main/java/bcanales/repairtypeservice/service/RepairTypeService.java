@@ -24,4 +24,13 @@ public class RepairTypeService {
     public Optional<RepairTypeEntity> getRepairTypeById(Long id) {
         return repairTypeRepository.findById(id);
     }
+
+    public boolean deleteRepairType(Long id) throws Exception {
+        try{
+            repairTypeRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package bcanales.repairservice.service;
 
 import bcanales.repairservice.clients.*;
+import bcanales.repairservice.dtos.SaveRepairDTO;
 import bcanales.repairservice.dtos.VehicleDTO;
 import bcanales.repairservice.entity.RepairDetailEntity;
 import bcanales.repairservice.entity.RepairEntity;
@@ -29,8 +30,13 @@ public class RepairService {
     RepairDetailService repairDetailService;
 
     @Transactional
-    public RepairEntity saveRepair(RepairEntity repair) throws Exception {
-        VehicleDTO vehicle = vehicleService.getVehicleById(repair.getVehicleId());
+    public RepairEntity saveRepair(SaveRepairDTO saveRepair) throws Exception {
+        String vehiclePlate = saveRepair.getVehiclePlate();
+        VehicleDTO vehicleDTO = new VehicleDTO();
+        vehicleDTO.setPlate(vehiclePlate);
+        VehicleDTO vehicle = vehicleService.getVehicleByPlate(vehicleDTO);
+
+        RepairEntity repair = new RepairEntity();
 
         repair.setVehicleId(vehicle.getId());
 
