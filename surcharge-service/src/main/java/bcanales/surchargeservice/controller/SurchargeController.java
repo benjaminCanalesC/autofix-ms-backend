@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/surcharges")
-@CrossOrigin("*")
 public class SurchargeController {
     @Autowired
     private SurchargeService surchargeService;

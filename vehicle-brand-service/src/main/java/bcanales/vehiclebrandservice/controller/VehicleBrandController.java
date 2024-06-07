@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/vehicleBrands")
-@CrossOrigin("*")
 public class VehicleBrandController {
     @Autowired
     VehicleBrandService vehicleBrandService;

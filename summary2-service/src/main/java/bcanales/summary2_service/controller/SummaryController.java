@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/summary2")
-@CrossOrigin("*")
 public class SummaryController {
     @Autowired
     private SummaryService summaryService;

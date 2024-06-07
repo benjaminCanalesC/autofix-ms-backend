@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/repairDetails")
-@CrossOrigin("*")
 public class RepairDetailController {
     @Autowired
     private RepairDetailService repairDetailService;
