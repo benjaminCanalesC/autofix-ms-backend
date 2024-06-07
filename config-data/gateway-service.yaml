@@ -45,3 +45,15 @@ spring:
           uri: lb://brand-discount-service
           predicates:
             - Path=/api/brandDiscounts/**
+        - id: vehicle-engine-service
+          uri: lb://vehicle-engine-service
+          predicates:
+            - Path=/api/vehicleEngines/**
+        - id: vehicle-type-service
+          uri: lb://vehicle-type-service
+          predicates:
+            - Path=/api/vehicleTypes/**
+        - id: vehicle-brand-service
+          uri: lb://vehicle-brand-service
+          predicates:
+            - Path=/api/vehicleBrands/**
